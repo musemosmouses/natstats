@@ -1,0 +1,253 @@
+/* Nusantara Data — stylesheet.
+ *
+ * One palette, one type stack, no webfont fetch: the site must render the
+ * same offline, so type is the system stack and colour is flat CSS. Deep
+ * teal carries the brand, warm amber marks the highlights, paper white
+ * keeps long tables readable. Breakpoints: two-column cards collapse to one
+ * below 900px; the nav scrolls horizontally on a phone instead of wrapping.
+ */
+
+:root {
+  --ink: #14201d;
+  --muted: #5b6b66;
+  --paper: #f7f5ef;
+  --card: #ffffff;
+  --teal: #0f766e;
+  --teal-dark: #0b5a54;
+  --teal-soft: #e6f4f1;
+  --amber: #d97706;
+  --amber-soft: #fdf0d5;
+  --line: #d9e2de;
+  --radius: 14px;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.55;
+}
+
+a { color: var(--teal); }
+a:hover { color: var(--teal-dark); }
+
+/* ---- top bar ------------------------------------------------------- */
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: var(--teal-dark);
+  color: #fff;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  min-height: 56px;
+}
+.brand {
+  color: #fff;
+  font-weight: 800;
+  font-size: 19px;
+  letter-spacing: 0.2px;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.brand::before {
+  content: "";
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+  background: var(--amber);
+  margin-right: 8px;
+}
+.mainnav {
+  display: flex;
+  gap: 2px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.mainnav a {
+  color: #d7ece8;
+  text-decoration: none;
+  font-size: 14.5px;
+  padding: 8px 11px;
+  border-radius: 8px;
+  white-space: nowrap;
+}
+.mainnav a:hover { background: rgba(255, 255, 255, 0.12); color: #fff; }
+.mainnav a[aria-current="page"] { background: #fff; color: var(--teal-dark); font-weight: 700; }
+
+/* ---- page frame ---------------------------------------------------- */
+main {
+  max-width: 1060px;
+  margin: 0 auto;
+  padding: 28px 20px 40px;
+}
+.hero { margin-bottom: 22px; }
+.hero.slim { margin-bottom: 16px; }
+.eyebrow {
+  margin: 0 0 6px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--teal);
+}
+h1 {
+  margin: 0 0 10px;
+  font-size: 40px;
+  line-height: 1.1;
+  letter-spacing: -0.5px;
+}
+h2 { margin: 0 0 4px; font-size: 21px; line-height: 1.25; }
+.lede { margin: 0; font-size: 17px; color: #33413c; max-width: 720px; }
+.hero-row { display: flex; align-items: center; gap: 14px; margin-top: 16px; flex-wrap: wrap; }
+.btn {
+  display: inline-block;
+  background: var(--amber);
+  color: #fff;
+  font-weight: 700;
+  text-decoration: none;
+  padding: 10px 16px;
+  border-radius: 10px;
+}
+.btn:hover { background: #b45309; color: #fff; }
+
+/* ---- KPI cards ----------------------------------------------------- */
+.kpis {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  margin-bottom: 18px;
+}
+.kpis.small { grid-template-columns: repeat(3, 1fr); margin: 14px 0 4px; }
+.kpi {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 16px 18px;
+}
+.kpi-value { font-size: 30px; font-weight: 800; letter-spacing: -0.5px; line-height: 1.15; }
+.kpi-label { font-size: 14px; font-weight: 600; margin-top: 2px; }
+.kpi-src { font-size: 12.5px; color: var(--muted); margin-top: 3px; }
+
+/* ---- cards, grids -------------------------------------------------- */
+.card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 20px 22px;
+  margin-bottom: 18px;
+}
+.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+.grid2 .card { margin-bottom: 0; }
+.grid2 { margin-bottom: 18px; }
+.sechead { margin-bottom: 12px; }
+.sechead p { margin: 0; font-size: 13.5px; color: var(--muted); }
+.more { margin: 12px 0 0; font-weight: 600; }
+svg { width: 100%; height: auto; display: block; }
+.donutwrap { display: flex; align-items: center; gap: 16px; }
+.donutwrap svg { width: 200px; flex: none; }
+.legend { list-style: none; margin: 0; padding: 0; font-size: 13.5px; }
+.legend li { margin: 5px 0; }
+.legend .dot {
+  display: inline-block;
+  width: 11px;
+  height: 11px;
+  border-radius: 3px;
+  margin-right: 7px;
+}
+
+/* ---- tables -------------------------------------------------------- */
+.tablescroll { overflow-x: auto; }
+table.data { width: 100%; border-collapse: collapse; font-size: 14.5px; }
+table.data th, table.data td { padding: 8px 10px; text-align: left; border-bottom: 1px solid var(--line); }
+table.data thead th { font-size: 13px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.04em; }
+table.data .num { text-align: right; font-variant-numeric: tabular-nums; }
+table.data tbody tr:hover { background: var(--teal-soft); }
+table.data th[data-sort] { cursor: pointer; user-select: none; }
+table.data th[data-sort]:hover { color: var(--teal); }
+table.data th.sorted { color: var(--teal); }
+.count { font-size: 13.5px; color: var(--muted); margin: 10px 0 6px; }
+.empty { color: var(--muted); font-style: italic; }
+
+/* ---- controls ------------------------------------------------------ */
+.yearpick { font-weight: 600; font-size: 15px; }
+.yearpick select, .compare-controls select {
+  font: inherit;
+  padding: 8px 10px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fff;
+  color: var(--ink);
+}
+.controls { display: flex; flex-wrap: wrap; gap: 14px; align-items: center; }
+.search { font-weight: 600; font-size: 15px; }
+.search input {
+  font: inherit;
+  font-weight: 400;
+  padding: 8px 10px;
+  margin-left: 6px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  width: 240px;
+  background: #fff;
+}
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chips button, .toggle button, #cmpSwap {
+  font: inherit;
+  font-size: 13.5px;
+  padding: 7px 12px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: #fff;
+  color: var(--ink);
+  cursor: pointer;
+}
+.chips button.on, .toggle button.on { background: var(--teal); border-color: var(--teal); color: #fff; font-weight: 700; }
+.toggle { display: inline-flex; gap: 0; }
+.toggle button { border-radius: 0; }
+.toggle button:first-child { border-radius: 999px 0 0 999px; }
+.toggle button:last-child { border-radius: 0 999px 999px 0; }
+.compare-controls { display: flex; flex-wrap: wrap; gap: 12px; align-items: end; margin-top: 16px; }
+.compare-controls label { font-weight: 600; font-size: 14px; display: flex; flex-direction: column; gap: 4px; }
+#cmpSwap { border-radius: 10px; margin-bottom: 2px; }
+.big { font-size: 34px; font-weight: 800; letter-spacing: -0.5px; margin: 6px 0; }
+.facts { margin: 0; }
+.facts dt { font-weight: 700; margin-top: 10px; }
+.facts dd { margin: 0; color: #33413c; }
+.notes { margin: 0; padding-left: 20px; }
+.notes li { margin: 8px 0; }
+
+/* ---- footer -------------------------------------------------------- */
+.sitefoot {
+  max-width: 1060px;
+  margin: 0 auto;
+  padding: 0 20px 36px;
+  color: var(--muted);
+  font-size: 13.5px;
+}
+.sitefoot p { margin: 4px 0; }
+
+/* ---- phone --------------------------------------------------------- */
+@media (max-width: 900px) {
+  .grid2 { grid-template-columns: 1fr; }
+  .kpis { grid-template-columns: repeat(2, 1fr); }
+  .donutwrap { flex-direction: column; align-items: flex-start; }
+}
+@media (max-width: 600px) {
+  h1 { font-size: 30px; }
+  .kpis { grid-template-columns: 1fr 1fr; gap: 10px; }
+  .kpi { padding: 12px 14px; }
+  .kpi-value { font-size: 22px; }
+  .topbar { gap: 12px; padding: 0 12px; }
+  main { padding: 20px 14px 30px; }
+  .card { padding: 16px; }
+  .search input { width: 170px; }
+}
+
